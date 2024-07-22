@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>이미지 슬라이드와 반응형 웹 예제</title>
+  
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  
+  <!-- Custom CSS -->
+  <style>
+    /* 기본 스타일 */
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    .swiper-container {
+      width: 100%;
+      height: 600px; /* 슬라이드 높이 조정 */
+      margin-bottom: 20px;
+    }
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    /* 미디어 쿼리 */
+    @media only screen and (max-width: 768px) {
+      .swiper-container {
+        height: 300px; /* 작은 화면에서 슬라이드 높이 조정 */
+      }
+    }
+    @media only screen and (max-width: 480px) {
+      .swiper-container {
+        height: 200px; /* 매우 작은 화면에서 슬라이드 높이 조정 */
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="container">
+    <h1 class="section-title">이미지 슬라이드 예제</h1>
+
+    <!-- Swiper -->
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><button type="button"><img id="img" src="/image/image1.png"></button></div>
+        <div class="swiper-slide"><img id="img" src="/image/image2.png"></div>
+        <div class="swiper-slide"><img id="img" src="/image/image3.png" alt="Image 3"></div>
+        <!-- 필요에 따라 더 많은 슬라이드 추가 -->
+      </div>
+      <!-- 페이지네이션 -->
+      <div class="swiper-pagination"></div>
+
+      <!-- 네비게이션 버튼 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Swiper 초기화 -->
+  <script>
+    var swiper = new Swiper('.swiper-container', {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 30,
+      centeredSlides: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  </script>
+
+</body>
+</html>
