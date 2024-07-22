@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +25,30 @@
       margin-bottom: 30px;
     }
     .swiper-container {
+      position: relative;
       width: 100%;
       height: 600px; 
       margin-bottom: 20px;
-      box-shadow: 15px 8px 5px -3px #555555
+      box-shadow: 15px 8px 5px -3px #555555;
+      pointer-events: none; 
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px; 
+      height: 50px; 
+      background-color: rgba(255, 255, 255, 0.5); 
+      border: none;
+      cursor: pointer;
+      pointer-events: auto; 
+    }
+    .swiper-button-prev {
+      left: 10px; 
+    }
+    .swiper-button-next {
+      right: 10px; 
     }
     .swiper-slide {
       text-align: center;
@@ -38,18 +58,17 @@
       justify-content: center;
       align-items: center;
     }
-    #img{
-        max-width: 100%;
-        max-height: 100%;
+    #img {
+      max-width: 100%;
+      max-height: 100%;
     }
-    button{
-      border-style:none;
+    button {
+      border-style: none;
     }
-    .swiper-slide:hover{
-      width:105%;
-      height: 105%;
+    p {
+      margin-top: 5%;
+      margin-left: 43%;
     }
-
     @media only screen and (max-width: 768px) {
       .swiper-container {
         height: 300px; 
@@ -65,21 +84,22 @@
 <body>
 
   <div class="container">
-    <h1 class="section-title">이한결의 작업물</h1>
+    <h1 class="section-title">이한결의 작업물</h1> 
     <hr>
-
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide"><button type="button" onclick="location.href='./document/1/cooking.html'"><img id="img" src="./image/image1.png"></button></div>
         <div class="swiper-slide"><button type="button" onclick="location.href='./document/3/index.html'"><img id="img" src="./image/image2.png"></button></div>
-        <div class="swiper-slide"><button type="button"onclick="location.href='./document/2/웹프_ver2.html'"><img id="img" src="./image/image3.png"></button></div>
-        <div class="swiper-slide"><button type="button"onclick="location.href='./document/4/ICT.html'"><img id="img" src="./image/image4.png"></button></div>
+        <div class="swiper-slide"><button type="button" onclick="location.href='./document/2/웹프_ver2.html'"><img id="img" src="./image/image3.png"></button></div>
+        <div class="swiper-slide"><button type="button" onclick="location.href='./document/4/ICT.html'"><img id="img" src="./image/image4.png"></button></div>
         <!-- 필요에 따라 더 많은 슬라이드 추가 -->
       </div>
       <div class="swiper-pagination"></div>
       
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <button class="swiper-button-prev"></button>
+      <button class="swiper-button-next"></button>
+      
+      <p> 클릭시 해당 작업물로 이동 </p>
     </div>
     
   </div>
