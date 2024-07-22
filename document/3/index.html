@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href = "./css/ui.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton+SC&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>game</title>
+    
+</head>
+<body>
+    <div class="background">
+        <div class="main-content">
+            <div class="content">
+                <h1 class="title">STRIKERS</h1>
+                <h2 class="title">1945</h2>
+                <div id="form_div">
+                    <p>NAME</p>
+                    <form action="./html/test1.html" method="get" >
+                        <input type="text" id="user_name" name="user_name">
+                        <button type="submit" class="custom-btn btn-8"><span>START</span></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="description">
+                <div id="rank">
+                    <p id="rank_p">
+                        rank<br>
+
+                    </p>
+                </div>
+                <div id="des">
+                <p>W : forward &nbsp; A : Left <br>
+                    S : backward <span style="padding-left: 1.6%;">D : right</span> <br>
+                    J : Attack &nbsp; <span style="padding-left: 7.7%;">K : bomb</span><br><br>
+                    With the restart you can strengthen the plane
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // localStorage에서 new_rank 데이터 가져오기
+            const new_rank = JSON.parse(localStorage.getItem('new_rank'));
+
+            // ui.html의 rank_p 요소 가져오기
+            const rankParagraph = document.querySelector('#rank_p');
+
+            if (new_rank) {
+                // rank 데이터를 문자열로 생성
+                let rankText = 'rank<br>';
+                for (const [key, value] of Object.entries(new_rank)) {
+                    rankText += `${key}: ${value}<br>`;
+                }
+
+                // rank 데이터를 p 요소에 삽입
+                rankParagraph.innerHTML = rankText;
+            } else {
+                // new_rank 데이터가 없을 경우 직접 초기 rank 데이터 저장 및 표시
+                const rank = {
+                    "AAA": 4,
+                    "BBB": 5,
+                    "CCC": 6,
+                    "DDD": 6,
+                    "EEE": 7,
+                    "FFF": 9,
+                    "GGG": 10,
+                    "HHH": 10,
+                    "III": 12,
+                    "JJJ": 13,
+                };
+                localStorage.setItem('new_rank', JSON.stringify(rank));
+                rankParagraph.innerHTML = 'rank<br>' + Object.entries(rank).map(([key, value]) => `${key}: ${value}`).join('<br>');
+            }
+        });
+    </script>
+</body>
+</html>

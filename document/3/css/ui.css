@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+      .anton-sc-regular {
+          font-family: "Anton SC", sans-serif;
+          font-weight: 400;
+          font-style: normal;
+      }
+
+      body, html {
+          height: 100%;
+          margin: 0;
+          font-family: Arial, sans-serif;
+      }
+
+      .background {
+          background-image: url('../image/background_image.jpg');
+          height: 100%;
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          display: flex;
+          justify-content: center;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          opacity: 0.8;
+      }
+
+      .main-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+      }
+      
+      .content {
+          flex: 1;
+          width: 80%;
+          padding-left: 25%;
+      }
+
+        
+      #rank {
+        right: 0%;
+        
+        background-color: #000000;
+      }
+      #rank p {
+        color: #f0ecfc;
+        font-family: "Silkscreen";
+          font-size: 18px;
+          line-height: 1.5;
+          padding: 0 3%;
+      }
+      .description {
+        margin-top: 12%;
+        right: 0%;
+        width: 20%;
+        
+        text-align: left;
+        padding-top: 1%;
+        padding-left: 0.8%;
+        background-color: #000000;
+      }
+        
+        .description p {
+          color: #f0ecfc;
+          font-family: "Silkscreen";
+            font-size: 18px;
+            line-height: 1.5;
+            padding: 0 3%;
+        }
+
+        #des{margin-top: 13%;}
+
+        .title {
+            font-size: 13em;
+            margin: 0;
+            font-family: "Anton SC";
+            letter-spacing: 3px;
+            background: linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            background: -webkit-linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            background: linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            background: -webkit-linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 5px rgb(123, 0, 0);
+            clip-path: inset(1px);
+        }
+        #form_div > p{
+            font-size: 40px; font-family: "Anton SC"; letter-spacing: 3px;
+            background: linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            background: -webkit-linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            background: linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            background: -webkit-linear-gradient(
+                307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 2px rgb(123, 0, 0);
+            clip-path: inset(1px);
+            
+        }
+
+        #form_div {
+            margin-top: 50px;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 20px;
+            
+        }
+
+        input {
+           
+            margin-bottom: 30px;
+            padding: 5px;
+        }
+
+        /* button {
+            padding: 10px 20px;
+            background-color: #444;
+            color: white;
+            border: none;
+            cursor: pointer;
+        } */
+
+        .custom-btn {
+            margin: 30px;
+            width: 150px;
+            height: 40px;
+            color: #fff;
+            border-radius: 5px;
+            padding: 10px 25px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-block;
+             box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+             7px 7px 20px 0px rgba(0,0,0,.1),
+             4px 4px 5px 0px rgba(0,0,0,.1);
+            outline: none;
+          }
+        .btn-8 {
+        background-color: #f0ecfc;
+        background-image: linear-gradient(315deg, #606060 0%, #a2a1a1 74%);
+          line-height: 42px;
+          padding: 0;
+          border: none;
+        }
+        .btn-8 span {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 100%;
+        }
+        .btn-8:before,
+        .btn-8:after {
+          position: absolute;
+          content: "";
+          right: 0;
+          bottom: 0;
+          background: #5e5e5e;
+          /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                      -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.5),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+          transition: all 0.3s ease;
+        }
+        .btn-8:before{
+           height: 0%;
+           width: 2px;
+        }
+        .btn-8:after {
+          width: 0%;
+          height: 2px;
+        }
+        .btn-8:hover:before {
+          height: 100%;
+        }
+        .btn-8:hover:after {
+          width: 100%;
+        }
+        .btn-8:hover{
+          background: transparent;
+        }
+        .btn-8 span:hover{
+          color: #000000;
+        }
+        .btn-8 span:before,
+        .btn-8 span:after {
+          position: absolute;
+          content: "";
+          left: 0;
+          top: 0;
+          background: #5e5e5e;
+          /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+                      -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.5),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+          transition: all 0.3s ease;
+        }
+        .btn-8 span:before {
+          width: 2px;
+          height: 0%;
+        }
+        .btn-8 span:after {
+          height: 2px;
+          width: 0%;
+        }
+        .btn-8 span:hover:before {
+          height: 100%;
+        }
+        .btn-8 span:hover:after {
+          width: 100%;
+        }
+      

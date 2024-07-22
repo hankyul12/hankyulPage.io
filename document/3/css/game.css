@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+.anton-sc-regular {
+    font-family: "Anton SC", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+}
+.silkscreen-regular {
+  font-family: "Silkscreen", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#canvass{
+  width: 80%;
+  
+  float: left;
+}
+
+canvas {
+  width: 100%;
+  /*width: 1600px;*/
+  /*height: 1000px; */
+  height: 100vh;
+  display: block;
+  margin: auto;
+  background-color: #333;
+  margin-left: -1px;
+}
+
+#gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  max-width: 100%;
+  height: auto;
+}
+
+
+#gameOver > p{
+  font-size: 20px;
+  font-family: "Silkscreen";
+}
+
+#gameOver > h1{
+    font-size: 120px; font-family: "Anton SC"; letter-spacing: 3px;
+    font-weight: 800;
+    background: linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    background: -webkit-linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    background: linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    background: -webkit-linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px rgb(123, 0, 0);
+    clip-path: inset(1px);
+}
+
+#gameClear{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+#gameClear > h1{
+  font-size: 120px; font-family: "Anton SC"; letter-spacing: 3px;
+    font-weight: 800;
+    background: linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    background: -webkit-linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    background: linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    background: -webkit-linear-gradient(
+        307deg, #757575 0%, #dcdcdc 50%, #757575 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 2px rgb(123, 0, 0);
+    clip-path: inset(1px);
+}
+
+#pilot{
+  position: absolute;
+  top: 20%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  border: 1px solid white;
+}
+#pilot_img {
+  max-width: 100%;
+  height: auto;
+}
+
+#board{
+  float: right;
+  width: 20%;
+  /* width: 500px; */
+  height: 1200px;
+  font-size: 20px;
+  font-family: "Silkscreen";
+  position: fixed;
+  align-items: center;
+  right: 0%;
+  top:40%;
+  text-align: center;
+}
+/* #board > p{
+  text-align: center;
+  margin-left: 100px;
+} */
+#rank{
+  float: right;
+  width: 20%;
+  /* width: 500px; */
+  height: 1200px;
+  font-size: 20px;
+  font-family: "Silkscreen";
+  position: fixed;
+  align-items: center;
+  right: 0%;
+  top:50%;
+  text-align: center;
+}
+.custom-btn {
+    margin: 30px;
+    width: 200px;
+    height: 50px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 20px;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+
+  .custom-btn1 {
+    letter-spacing: 2px;
+    margin: 10px;
+    width: 130px;
+    height: 90px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 5px;
+    font-family: "Silkscreen", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+     box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+     7px 7px 20px 0px rgba(0,0,0,.1),
+     4px 4px 5px 0px rgba(0,0,0,.1);
+    outline: none;
+  }
+  
+
+.btn-8 {
+background-color: #f0ecfc;
+background-image: linear-gradient(315deg, #606060 0%, #a2a1a1 74%);
+  line-height: 25px;
+  padding: 0;
+  border: none;
+}
+.btn-8 span {
+  padding-top: 10px; 
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-8:before,
+.btn-8:after {
+  position: absolute;
+  content: "";
+  right: 0;
+  bottom: 0;
+  background: #5e5e5e;
+  /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+  transition: all 0.3s ease;
+}
+.btn-8:before{
+   height: 0%;
+   width: 2px;
+}
+.btn-8:after {
+  width: 0%;
+  height: 2px;
+}
+.btn-8:hover:before {
+  height: 100%;
+}
+.btn-8:hover:after {
+  width: 100%;
+}
+.btn-8:hover{
+  background: transparent;
+}
+.btn-8 span:hover{
+  color: #ffffff;
+}
+.btn-8 span:before,
+.btn-8 span:after {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  background: #5e5e5e;
+  /*box-shadow:  4px 4px 6px 0 rgba(255,255,255,.5),
+              -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+    inset -4px -4px 6px 0 rgba(255,255,255,.5),
+    inset 4px 4px 6px 0 rgba(116, 125, 136, .3);*/
+  transition: all 0.3s ease;
+}
+.btn-8 span:before {
+  width: 2px;
+  height: 0%;
+}
+.btn-8 span:after {
+  height: 2px;
+  width: 0%;
+}
+.btn-8 span:hover:before {
+  height: 100%;
+}
+.btn-8 span:hover:after {
+  width: 100%;
+}
+

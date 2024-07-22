@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <style>
+        body{
+          font-size: larger;
+        }
+        h2{ text-shadow: 0px 0px 3px gray;}
+        header { 
+          text-shadow: 3px 3px 5px gray;
+          text-align: center;
+          width: 100%; 
+          height: 15%; 
+        }
+        nav{ 
+          width: 50%; height: 70%; float: left;
+        }
+        aside {
+           width: 45%; height: 70%; float: right; 
+        }
+        footer {
+           width: 100%; height: 15%; clear: both; 
+        }
+        ul{ border: 1px solid black;}
+        li { margin: 2px;}
+        #rate1[type=checkbox]{
+          display: none; 
+        }
+        input[type=checkbox]:checked ~ label{
+          text-shadow: 0 0 0 #FFFF00; 
+        }
+        label{
+          color: transparent;
+          text-shadow: 0 0 0 #f0f0f0; 
+        }
+        li button{
+          float:right;
+        }
+      </style>
+    </head>
+    <body>
+      <header>
+        <h3 style="font-size: 50px; margin : 0px" > T O D O </h3>
+        <hr>
+        <span id="clock" style="color:gray; font-size: 100px;">clock</span>
+        <span id="ampm" style="color:gray; font-size: 50px;"  >ampm</span>
+
+        <input type="button" value="알람" onclick="alarm()">
+      </header>
+  
+      <hr>
+  
+      <nav>
+        <h2> L I S T </h2>
+        <button id="dialog-opener" type="button">할일 추가</button>
+        <input type="button" value="기록" onclick="record()">
+        <input type="button" value="기록 초기화" onclick="reset()">
+        <ul style="list-style-type : none; padding: 3px;" class="toDoList"></ul>
+      </nav>
+      <aside>
+        <h2> S O R T L I S T </h2>
+        <form action="#">
+            정렬방식
+            <select name="sort" id="sort">
+              <option value="0">중요한</option>
+              <option value="1">가나다순</option>
+              <option value="2">기한 내림차순</option>
+              <option value="3">기한 오름차순</option>
+            </select>
+            <input type="button" value="선택" onclick="mySort()">
+            <input type="button" value="초기화" onclick="cancel()">
+          </form>
+          <ul style="list-style-type : none; padding: 3px;" class="sortList"></ul>
+      </aside>
+      <footer>
+        <hr>
+        <span id="STR1">0개 중</span>
+        <span id="STR2"> 0개 완료</span>
+        <span id="STR3">0%</span>
+      </footer>
+      <hr>
+      <dialog id="dialog">
+        할 일
+        <input type="checkbox" name="rate1" id="rate1"><label for="rate1">⭐</label>
+        <input type="text" id="text" maxlength="25" >
+        <input type="button" value="추가" onclick="add()"> 
+        <button id="dialog-closer" type="button">닫기</button>
+        <br>
+        마감일 <input type="date" id="date">
+        
+        <input type="button" value="오늘" onclick="today()">
+        <input type="button" value="내일" onclick="tomorrow()">
+        <input type="button" value="일주일뒤" onclick="oneWeek()"> <br>
+      </dialog>
+    </body>
+    <script>
+      var ChkCnt = 0;
+      var allCnt = 0;
+      let toDos = []; 
+      var ChktoDos = [];
+      var DoneTodos=[];
+            window.onload= start;
+
+      function start() {
+        var value = localStorage.getItem("toDos");
+
+        if (value !== null) {
+          var storedStorage=JSON.parse(value);
+          var result = storedStorage;
+          var Done_value = localStorage.getItem("toDos_Done");
+          
+          if(Done_value !==null){
+            var Done_Storage=JSON.parse(Done_value);
+            for(var i =0; i < Done_Storage.length;i++){
+              DoneTodos.push(Done_Storage[i]);
+            }
+            var recordTodos = localStorage.getItem("DoneTodos");
+            if(recordTodos !==null){
+              var finalStorage=JSON.parse(recordTodos);
+              for(var i =0; i < finalStorage.length;i++){
+              DoneTodos.push(finalStorage[i]);
+            }
+            }
+            localStorage.setItem("DoneTodos", JSON.stringify(DoneTodos));
+            result = storedStorage.concat(Done_Storage).filter(item => !Done_Storage.includes(item));
+          }
+          for(var i=0; i<result.length; i++){
+            
+            var toDoList = document.querySelector(".toDoList");
+            var li = document.createElement("li"); 
+            var delBtn = document.createElement("button"); 
+            var chkBox = document.createElement('input');
+            chkBox.type='checkbox';
+            var span = document.createElement("span"); 
+            var date = Date.parse(result[i].slice(-10,result[i].length));
+            var today = new Date().getTime();
+            var day = Math.floor((date - today) / 86400000) + 1;
+            var str = " D-day : "+ day;
+
+            delBtn.innerText = "X";
+            delBtn.addEventListener("click", deleteToDo); 
+            chkBox.addEventListener("click", checkToDo);
+            
+            span.innerText = result[i]; 
+
+            li.appendChild(chkBox);
+            li.appendChild(span); 
+            li.append(str);
+            li.appendChild(delBtn); 
+            if(day < 0){
+              li.style.backgroundColor = 'pink';
+            }
+            else{
+              li.style.backgroundColor = '#b8e6bf';
+            }
+            toDoList.appendChild(li); 
+
+            allCnt++;
+            strPrint();
+
+            var li_text = span.innerText;
+            toDos.push(li_text); 
+            localStorage.setItem("toDos", JSON.stringify(toDos)); 
+
+
+          }
+        }
+        localStorage.removeItem('toDos_Done')
+      }
+        document.getElementById('dialog-opener').onclick =  function() {
+          document.getElementById('dialog').showModal();
+        }
+        document.getElementById('dialog-closer').addEventListener('click', function() {
+          document.getElementById('dialog').close();
+        })
+        function add(){
+          var toDoInput = document.getElementById('text');
+          var date = document.getElementById("date");
+          var currentValue = toDoInput.value;
+          paintToDo(currentValue);
+          toDoInput.value = "";
+          date.value="";
+        }
+        function deleteToDo(event) {
+        var toDoList = document.querySelector(".toDoList");
+        var btn = event.target; 
+        var li = btn.parentNode; 
+        var chk_node = li.firstChild;
+        if(chk_node.checked){
+          ChkCnt--;
+        }
+          toDoList.removeChild(li); 
+          toDos=[];
+          var list=document.getElementsByTagName("li");
+          for(var i =0;i<list.length;i++){
+            var str = (list[i].innerText).substring(0, (list[i].innerText).indexOf('D')-1);
+            toDos.push(str);
+          }
+          localStorage.removeItem("toDos");
+          localStorage.setItem("toDos", JSON.stringify(toDos));
+          allCnt--;
+          strPrint();
+        
+      }
+      function checkToDo(event){
+        var chk = event.target;
+        var li = chk.parentNode;
+        var day = li.innerText.substring((li.innerText).indexOf(":")+2,(li.innerText).indexOf("X"));
+        if(this.checked){
+          li.style.textDecoration = 'line-through';
+          li.style.color = 'gray';
+          li.style.backgroundColor = 'gainsboro';
+          ChkCnt++;
+          var str = li.innerText.substring(0,(li.innerText).indexOf("D")-1);
+          ChktoDos.push(str);
+          localStorage.setItem("toDos_Done", JSON.stringify(ChktoDos));
+        }
+        else{
+          li.style.textDecoration = '';
+          li.style.color='';
+          if(day < 0){
+              li.style.backgroundColor = 'pink';
+          }else{
+              li.style.backgroundColor = '#b8e6bf';
+          }
+          ChkCnt--;
+          var str = li.innerText.substring(0,(li.innerText).indexOf("D")-1);
+          for(var i = 0 ; i<ChktoDos.length;i++){
+            if(str === ChktoDos[i]){
+              ChktoDos.splice(i,1);
+            }
+          }
+          localStorage.setItem("toDos_Done", JSON.stringify(ChktoDos));
+        }
+        strPrint();
+      }
+      function paintToDo(text) {
+        var toDoList = document.querySelector(".toDoList");
+        var li = document.createElement("li"); 
+        var delBtn = document.createElement("button"); 
+        var chkBox = document.createElement('input');
+        chkBox.type='checkbox';
+        var span = document.createElement("span"); 
+        var date = document.getElementById("date");
+        var important = document.getElementById("rate1");
+        var today = new Date().getTime();
+        var day = Math.floor((date.valueAsNumber - today) / 86400000) + 1;
+        var str = " D-day : "+ day;
+
+        if(date.value){
+          delBtn.innerText = "X";
+          delBtn.addEventListener("click", deleteToDo); 
+          chkBox.addEventListener("click", checkToDo);
+
+          span.innerText = `${text}   ${date.value}`; 
+          if(important.checked){
+            var temp = span.innerText;
+            span.innerText = '⭐' + temp;
+          }
+
+          li.appendChild(chkBox);
+          li.appendChild(span); 
+          li.append(str);
+          li.appendChild(delBtn); 
+
+          toDoList.appendChild(li); 
+          if(day < 0){
+              li.style.backgroundColor = 'pink';
+            }
+            else{
+              li.style.backgroundColor = '#b8e6bf';
+            }
+
+          allCnt++;
+          strPrint();
+
+          var li_text = span.innerText;
+          toDos.push(li_text);
+          localStorage.setItem("toDos", JSON.stringify(toDos)); 
+        }
+        else{
+          alert("날짜를 입력해주세요");
+        }
+      }
+      function strPrint(){
+        var count = Math.floor(ChkCnt/allCnt *100);
+        document.getElementById("STR1").innerText=allCnt+"개 중";
+        document.getElementById("STR2").innerText=ChkCnt+"개 완료";
+        document.getElementById('STR3').innerText=count+"%";
+      }
+      function record(){
+        var win =null;
+        var value = localStorage.getItem("DoneTodos");
+        if(value !==null){
+            var storedStorage = JSON.parse(value);
+            var ul = document.createElement("ul");
+            var str = document.createElement("span");
+            str.innerText="최근에 완료된 순입니다."
+            for(var i=0;i<storedStorage.length;i++){
+                var li = document.createElement("li");
+                var span = document.createElement("span");
+                span.innerText = storedStorage[i];
+                li.appendChild(span);
+                ul.appendChild(li);
+            }
+            if(win==null || win.closed){
+                win = window.open("","outWin",'width=400, height=430');
+            }
+            win.document.open();
+            win.document.write(str.innerHTML + ul.innerHTML);
+            win.document.close();
+        }
+        else{
+          alert("이전에 완료된 투두리스트가 없습니다")
+        }
+      }
+      function reset(){
+
+        var value = localStorage.getItem("DoneTodos");
+        if(value!==null){
+          localStorage.removeItem("DoneTodos");
+        }
+      }
+      function mySort(){
+        var ol = document.querySelector(".sortList");
+        var value_str = document.getElementById('sort');
+        var value_num= value_str.options[value_str.selectedIndex].value;
+        li_mylist=[];
+        ol.replaceChildren();
+        var li_list=document.getElementsByTagName("li");
+        for(var i =0;i<li_list.length;i++){
+            var str = li_list[i].innerText;
+            if(li_list[i].style.color != 'gray')
+                li_mylist.push(str);
+        }
+        if(value_num ==0){
+          for(var i =0;i<li_mylist.length;i++){
+            if(li_mylist[i].slice(0,1) == "⭐"){
+              var li = document.createElement("li"); 
+                li.innerText=li_mylist[i].slice(0,-1);
+                ol.appendChild(li);
+            }
+          }
+        }
+        if( value_num ==1){
+            for(var i =0;i<li_mylist.length;i++){
+              if(li_mylist[i].slice(0,1) == "⭐"){
+                li_mylist[i]=li_mylist[i].slice(1,);
+              }
+            }
+            li_mylist.sort();
+            for(var i =0;i<li_mylist.length;i++){
+              var li = document.createElement("li"); 
+              li.innerText=li_mylist[i].slice(0,-1);
+              ol.appendChild(li);
+            }
+        }
+        else if(value_num==2){
+            li_mylist.sort(function(a,b){
+                return ((b.substring(b.indexOf(':')+2,b.length-1)) - a.substring(a.indexOf(':')+2,a.length-1));
+            })
+            for(var i =0;i<li_mylist.length;i++){
+                var li = document.createElement("li"); 
+                li.innerText=li_mylist[i].slice(0,-1);
+                ol.appendChild(li);
+            }
+        }
+
+        else if(value_num == 3){
+            li_mylist.sort(function(a,b){
+                return (a.substring(a.indexOf(':')+2,a.length-1) - (b.substring(b.indexOf(':')+2,b.length-1)));
+            })
+            for(var i =0;i<li_mylist.length;i++){
+                var li = document.createElement("li"); 
+                li.innerText=li_mylist[i].slice(0,-1);
+                ol.appendChild(li);
+            }
+        }
+
+      }
+      function today(){
+        var date = document.getElementById("date");
+        var today = new Date();
+
+        var dateFormat = today.getFullYear() + '-' + ((today.getMonth()+1) <9 ? "0" + today.getMonth()+1 : today.getMonth()+1 ) + '-' +
+        ((today.getDate())<9 ? "0" + (today.getDate()) : (today.getDate()) );
+        date.value = dateFormat;
+      }
+      function tomorrow(){
+        var date = document.getElementById("date");
+        var today = new Date();
+        var tomorrow_day = today.getDate()+1;
+        var dateFormat = today.getFullYear() + '-' + ((today.getMonth()+1) <9 ? "0" + today.getMonth()+1 : today.getMonth()+1 ) + '-' +
+        ((tomorrow_day)<9 ? "0" + (tomorrow_day) : (tomorrow_day) );
+        date.value = dateFormat;
+      }
+      function oneWeek(){
+        var date = document.getElementById("date");
+        var today = new Date();
+        var week_day = today.getDate()+7;
+        var dateFormat = today.getFullYear() + '-' + ((today.getMonth()+1) <9 ? "0" + today.getMonth()+1 : today.getMonth()+1 ) + '-' +
+        ((week_day)<9 ? "0" + (week_day) : (week_day) );
+        date.value = dateFormat;
+      }
+      function cancel(){
+        var ol = document.querySelector(".sortList");
+        ol.replaceChildren();
+      }
+      function alarm(){
+        var win=null;
+        var str = document.createElement("span");
+        var time = document.createElement("input");
+        time.type="button";
+
+        str.innerText="알람"
+        if(win==null || win.closed){
+                win = window.open("alarm.html","outWin",'width=450, height=200');
+        }
+
+      }
+      setInterval(function(){
+
+        var clock = document.getElementById("clock");
+        var ampm=document.getElementById("ampm");
+        var time = new Date();
+        var hours = time.getHours();
+        var minutes = time.getMinutes();
+        var seconds = time.getSeconds();
+        var AmPm ="AM";
+        if(hours > 12){   
+          var AmPm ="PM";
+          hours %= 12;
+          }
+          clock.innerText = `${hours < 10 ? `0${hours}` : hours}:${minutes < 10 ? `0${minutes}` : minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+          ampm.innerText = `${AmPm}`;
+        },1000);
+
+      </script>
+</html>
