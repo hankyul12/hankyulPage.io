@@ -5,16 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>이한결의 작업물</title>
   
-  <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-  
-  <!-- Custom CSS -->
   <style>
-    /* 기본 스타일 */
     body {
       font-family: Arial, sans-serif;
       line-height: 1.6;
-      background-color: #f9f9f9;
+      background-color: #d3d3d3;
       margin: 0;
       padding: 0;
     }
@@ -26,12 +22,13 @@
     .section-title {
       font-size: 24px;
       font-weight: bold;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     .swiper-container {
       width: 100%;
-      height: 600px; /* 슬라이드 높이 조정 */
+      height: 600px; 
       margin-bottom: 20px;
+      box-shadow: 15px 8px 5px -3px #555555
     }
     .swiper-slide {
       text-align: center;
@@ -45,16 +42,22 @@
         max-width: 100%;
         max-height: 100%;
     }
+    button{
+      border-style:none;
+    }
+    .swiper-slide:hover{
+      width:105%;
+      height: 105%;
+    }
 
-    /* 미디어 쿼리 */
     @media only screen and (max-width: 768px) {
       .swiper-container {
-        height: 300px; /* 작은 화면에서 슬라이드 높이 조정 */
+        height: 300px; 
       }
     }
     @media only screen and (max-width: 480px) {
       .swiper-container {
-        height: 200px; /* 매우 작은 화면에서 슬라이드 높이 조정 */
+        height: 200px; 
       }
     }
   </style>
@@ -70,7 +73,7 @@
         <div class="swiper-slide"><button type="button" onclick="location.href='./document/1/cooking.html'"><img id="img" src="./image/image1.png"></button></div>
         <div class="swiper-slide"><button type="button" onclick="location.href='./document/3/index.html'"><img id="img" src="./image/image2.png"></button></div>
         <div class="swiper-slide"><button type="button"onclick="location.href='./document/2/웹프_ver2.html'"><img id="img" src="./image/image3.png"></button></div>
-        <div class="swiper-slide"><button type="button"onclick="location.href='./document/2/웹프_ver2.html'"><img id="img" src="./image/image4.png"></button></div>
+        <div class="swiper-slide"><button type="button"onclick="location.href='./document/4/ICT.html'"><img id="img" src="./image/image4.png"></button></div>
         <!-- 필요에 따라 더 많은 슬라이드 추가 -->
       </div>
       <!-- 페이지네이션 -->
